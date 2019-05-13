@@ -67,13 +67,19 @@ class MyLaptopDelegate(object):
 
 
 # TODO: Add functions here as needed.
+def go(mqtt_sender, direction,speed,distance):
+    print()
+    print("Robot is", direction)
+    print("at a speed of:", speed)
+    print("for a distance of:", distance)
+    mqtt_sender.send_message("move", [speed, distance])
 
 def move_forward(speed_entry_box,distance_entry_box, mqqt_sender):
     speed = int(speed_entry_box.get())
     dist = int(distance_entry_box.get())
-    go(mqqt_sender,speed,speed)
+    go(mqqt_sender,"MOVING FORWARD",speed,dist)
 
 def move_backward(speed_entry_box,distance_entry_box, mqqt_sender):
     speed = -1*int(speed_entry_box.get())
     dist = int(distance_entry_box.get())
-    go(mqqt_sender,speed,speed)
+    move(mqqt_sender,"MOVING BACKWARD", speed, dist)
