@@ -44,8 +44,8 @@ def get_my_frame(root, window, mqtt_sender):
     back_button.grid(row=3, column=2)
 
     #Set button callback
-    forward_button['command'] = lambda: print("Forward button")
-    back_button['command'] = lambda: print("Back button")
+    forward_button['command'] = lambda:(move_forward(speed_entry,distance_entry,mqtt_sender))
+    back_button['command'] = lambda:(move_backward(speed_entry,distance_entry,mqtt_sender))
     # Return your frame:
     return frame
 
@@ -67,7 +67,7 @@ class MyLaptopDelegate(object):
 
 
 # TODO: Add functions here as needed.
-def go(mqtt_sender, direction,speed,distance):
+def move(mqtt_sender, direction,speed,distance):
     print()
     print("Robot is", direction)
     print("at a speed of:", speed)
@@ -77,7 +77,7 @@ def go(mqtt_sender, direction,speed,distance):
 def move_forward(speed_entry_box,distance_entry_box, mqqt_sender):
     speed = int(speed_entry_box.get())
     dist = int(distance_entry_box.get())
-    go(mqqt_sender,"MOVING FORWARD",speed,dist)
+    move(mqqt_sender,"MOVING FORWARD",speed,dist)
 
 def move_backward(speed_entry_box,distance_entry_box, mqqt_sender):
     speed = -1*int(speed_entry_box.get())
