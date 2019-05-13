@@ -15,9 +15,6 @@ import mqtt_remote_method_calls as mqtt
 import m2_laptop_code as m2
 import m3_laptop_code as m3
 
-def main():
-    print()
-
 def get_my_frame(root, window, mqtt_sender):
     # Construct your frame:
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
@@ -31,10 +28,10 @@ def get_my_frame(root, window, mqtt_sender):
 
     speed_label = ttk.Label(frame, text="Speed (0 to 100)")
     speed_entry = ttk.Entry(frame, width=8)
-    speed_entry.insert(0, "100")
+    speed_entry.insert(0, "50")
     distance_label = ttk.Label(frame, text="Distance (0 to 100)")
     distance_entry = ttk.Entry(frame, width=8, justify=tkinter.RIGHT)
-    distance_entry.insert(0, "100")
+    distance_entry.insert(0, "50")
     forward_button = ttk.Button(frame, text="Forwards")
     back_button = ttk.Button(frame, text="Backwards")
 
@@ -71,7 +68,12 @@ class MyLaptopDelegate(object):
 
 # TODO: Add functions here as needed.
 
-def forward(speed,distance, mqqt_sender):
-    print()
+def move_forward(speed_entry_box,distance_entry_box, mqqt_sender):
+    speed = int(speed_entry_box.get())
+    dist = int(distance_entry_box.get())
+    go(mqqt_sender,speed,speed)
 
-main()
+def move_backward(speed_entry_box,distance_entry_box, mqqt_sender):
+    speed = -1*int(speed_entry_box.get())
+    dist = int(distance_entry_box.get())
+    go(mqqt_sender,speed,speed)
