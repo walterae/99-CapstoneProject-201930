@@ -36,11 +36,11 @@ class MyRobotDelegate(object):
         print_message_received("move",[speed,distance])
         self.robot.drive_system.go(speed,speed)
         self.robot.drive_system.left_motor.reset_position()
-        wheel_dist = self.robot.drive_system.left_motor.get_position()*0.4
+        wheel_dist = self.robot.drive_system.left_motor.get_position()*0.012
         while True:
             if wheel_dist > distance:
                 break
-            wheel_dist = self.robot.drive_system.left_motor.get_position() * 0.65
+            wheel_dist = self.robot.drive_system.left_motor.get_position()*0.012
         self.robot.drive_system.stop()
 
 def print_message_received(method_name, arguments):
