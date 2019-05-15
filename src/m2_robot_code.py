@@ -33,6 +33,14 @@ class MyRobotDelegate(object):
 
     # TODO: Add methods here as needed.
 
+    def go_spin(self, left_motor_speed, right_motor_speed):
+        print_message_received('go_spin', [left_motor_speed, right_motor_speed])
+        self.robot.drive_system.go(left_motor_speed, right_motor_speed)
+
+    def spin(self, left_length, right_length, speed):
+        print_message_received("spin", [left_length, right_length, speed])
+        self.robot.drive_system.go_spin(speed)
+        self.robot.drive_system.stop()
 
 def print_message_received(method_name, arguments=None):
     print()
