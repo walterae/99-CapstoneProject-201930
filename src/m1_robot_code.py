@@ -43,6 +43,14 @@ class MyRobotDelegate(object):
             wheel_dist = self.robot.drive_system.left_motor.get_position()*0.012
         self.robot.drive_system.stop()
 
+    def go_to(self,x,delta,speed):
+        print_message_received("go to",[x,delta,speed])
+        self.robot.drive_system.go(speed,speed)
+        dist_from=[]
+        while True:
+            if
+
+        self.robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()
 def print_message_received(method_name, arguments):
     print()
     print("The robot's delegate has received a message")

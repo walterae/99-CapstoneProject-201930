@@ -60,7 +60,7 @@ def get_my_frame(root, window, mqtt_sender):
     #Set button callback
     forward_button['command'] = lambda:(move_forward(speed_entry,distance_entry,mqtt_sender))
     back_button['command'] = lambda:(move_backward(speed_entry,distance_entry,mqtt_sender))
-    go_until_button['command'] = lambda:(go_until_distance(x_entry,delta_entry,speed_entry))
+    go_until_button['command'] = lambda:(go_until_distance(x_entry,delta_entry,speed_entry,mqtt_sender))
     # Return your frame:
     return frame
 
@@ -80,7 +80,6 @@ class MyLaptopDelegate(object):
 
     # TODO: Add methods here as needed.
 
-
 # TODO: Add functions here as needed.
 def move(mqtt_sender, direction,speed,distance):
     print()
@@ -88,6 +87,13 @@ def move(mqtt_sender, direction,speed,distance):
     print("at a speed of:", speed)
     print("for a distance of: {} inches".format(distance))
     mqtt_sender.send_message("move", [speed, distance])
+
+def go_to(mqqt_sender,function,x,delta,speed):
+    print()
+    print("Robot is",function)
+    print("it is {} inches +/- {} inches away from nearest object".format(x,delta))
+    print("at a speed of:",speed)
+    mqqt_sender.send_message("go to",[x,delta,speed])
 
 def move_forward(speed_entry_box,distance_entry_box, mqqt_sender):
     speed = int(speed_entry_box.get())
@@ -98,7 +104,9 @@ def move_backward(speed_entry_box,distance_entry_box, mqqt_sender):
     speed = -1*int(speed_entry_box.get())
     dist = int(distance_entry_box.get())
     move(mqqt_sender,"MOVING BACKWARD", speed, dist)
-def go_until_distance(x,delta,speed):
+
+def go_until_distance(x,delta,speed,mqqt_sender):
     x = int(x.get())
     delta = int(delta.get())
     speed = int(speed.get())
+    go_to(mqqt_sender,"GOING UNTIL", x, delta, speed)
