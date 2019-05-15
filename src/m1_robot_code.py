@@ -47,10 +47,16 @@ class MyRobotDelegate(object):
         print_message_received("go to",[x,delta,speed])
         self.robot.drive_system.go(speed,speed)
         dist_from=[]
-        while True:
-            if
+        for k in range(5):
+            dist_from = dist_from + [self.robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()]
 
-        self.robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+        while True:
+            if (dist_from[1] + dist_from[2] + dist_from [3])/3 > x:
+                break
+                dist_from
+
+
+
 def print_message_received(method_name, arguments):
     print()
     print("The robot's delegate has received a message")

@@ -77,16 +77,16 @@ def spin(mqtt_sender, left_length, right_length, speed):
     print('For a speed of', speed)
     print('For a left length of', left_length)
     print('For a right length of', right_length)
-    mqtt_sender.send_message("spin", [left_length, right_length])
+    mqtt_sender.send_message("spin", [left_length, right_length, speed])
 
 
 def spin_left(left_length_entry_box, speed_entry_box, mqqt_sender):
     speed = int(speed_entry_box.get())
     left_length = int(left_length_entry_box.get())
-    spin(mqqt_sender, 'Spinning Left', left_length, speed)
+    spin(mqqt_sender, 'Spinning Left', left_length, right_length, speed)
 
 
 def spin_right(right_length_entry_box, speed_entry_box, mqqt_sender):
     speed = int(speed_entry_box.get())
     right_length = int(right_length_entry_box.get())
-    spin(mqqt_sender, 'Spinning Right', right_length, speed)
+    spin(mqqt_sender, 'Spinning Right', left_length, right_length, speed)
