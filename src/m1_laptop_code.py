@@ -34,18 +34,33 @@ def get_my_frame(root, window, mqtt_sender):
     distance_entry.insert(0, "50")
     forward_button = ttk.Button(frame, text="Forwards")
     back_button = ttk.Button(frame, text="Backwards")
+    delta_label =ttk.Label(frame,text="Delta")
+    delta_entry = ttk.Entry(frame, width=8)
+    delta_entry.insert(0,"0.5")
+    go_until_button = ttk.Button(frame, text ="Go Until")
+    x_label = ttk.Label(frame, text ="X")
+    x_entry = ttk.Entry(frame, width =8)
+    x_entry.insert(0,"5")
+    plus_or_minus_label = ttk.Label(frame, text="+ or -")
 
     #Grid Widgets
     speed_label.grid(row=1, column=0)
     speed_entry.grid(row=2, column=0)
-    distance_label.grid(row=1, column=3)
-    distance_entry.grid(row=2, column=3)
-    forward_button.grid(row=3, column=1)
-    back_button.grid(row=3, column=2)
+    distance_label.grid(row=1, column=5)
+    distance_entry.grid(row=2, column=5)
+    forward_button.grid(row=4, column=2)
+    back_button.grid(row=4, column=4)
+    delta_label.grid(row=1, column =4)
+    delta_entry.grid(row=2, column=4)
+    go_until_button.grid(row=3, column=3)
+    x_label.grid(row=1, column=2)
+    x_entry.grid(row=2, column=2)
+    plus_or_minus_label.grid(row=1, column=3)
 
     #Set button callback
     forward_button['command'] = lambda:(move_forward(speed_entry,distance_entry,mqtt_sender))
     back_button['command'] = lambda:(move_backward(speed_entry,distance_entry,mqtt_sender))
+    go_until_button['command'] = lambda:(go_until_distance(x_entry,delta_entry,speed_entry))
     # Return your frame:
     return frame
 
@@ -71,7 +86,7 @@ def move(mqtt_sender, direction,speed,distance):
     print()
     print("Robot is", direction)
     print("at a speed of:", speed)
-    print("for a distance of:", distance)
+    print("for a distance of: {} inches".format(distance))
     mqtt_sender.send_message("move", [speed, distance])
 
 def move_forward(speed_entry_box,distance_entry_box, mqqt_sender):
@@ -83,3 +98,7 @@ def move_backward(speed_entry_box,distance_entry_box, mqqt_sender):
     speed = -1*int(speed_entry_box.get())
     dist = int(distance_entry_box.get())
     move(mqqt_sender,"MOVING BACKWARD", speed, dist)
+def go_until_distance(x,delta,speed):
+    x = int(x.get())
+    delta = int(delta.get())
+    speed = int(speed.get())
