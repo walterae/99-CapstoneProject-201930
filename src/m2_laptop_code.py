@@ -65,7 +65,7 @@ class MyLaptopDelegate(object):
         self.mqtt_sender = None  # type: mqtt.MqttClient
 
     def set_mqtt_sender(self, mqtt_sender):
-        self.mqtt_sender = mqtt_sender
+        self.mqtt_sender = mqtt_sende
 
     # TODO: Add methods here as needed.
 
