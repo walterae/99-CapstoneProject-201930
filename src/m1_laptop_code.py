@@ -93,7 +93,7 @@ def go_to(mqqt_sender,function,x,delta,speed):
     print("Robot is",function)
     print("it is {} inches +/- {} inches away from nearest object".format(x,delta))
     print("at a speed of:",speed)
-    mqqt_sender.send_message("go_to",[x,delta,speed])
+    mqqt_sender.send_message("go_to", [x, delta, speed])
 
 def move_forward(speed_entry_box,distance_entry_box, mqqt_sender):
     speed = int(speed_entry_box.get())
@@ -107,6 +107,6 @@ def move_backward(speed_entry_box,distance_entry_box, mqqt_sender):
 
 def go_until_distance(x,delta,speed,mqqt_sender):
     x = int(x.get())
-    delta = int(delta.get())
+    delta = float(delta.get())
     speed = int(speed.get())
     go_to(mqqt_sender,"GOING UNTIL", x, delta, speed)
