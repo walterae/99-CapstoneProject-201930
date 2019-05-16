@@ -44,7 +44,7 @@ class MyRobotDelegate(object):
         self.robot.drive_system.stop()
 
     def go_to(self,x,delta,speed):
-        print_message_received("go to",[x,delta,speed])
+        print_message_received("go_to",[x,delta,speed])
         self.robot.drive_system.go(speed,speed)
         dist_from=[]
         for k in range(5):
