@@ -51,9 +51,9 @@ class MyRobotDelegate(object):
             dist_from = dist_from + [self.robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()]
             print(dist_from)
         while True:
-            if (dist_from[1] + dist_from[2] + dist_from [3])/3 + delta > x or (dist_from[1] + dist_from[2] + dist_from [3])/3 - delta > x:
+            if (dist_from[1] + dist_from[2] + dist_from [3])/3 + delta < x or (dist_from[1] + dist_from[2] + dist_from [3])/3 - delta < x:
                 break
-            for k in range(3):
+            for k in range(4):
                 dist_from[k] = dist_from[k+1]
             dist_from[4] = [self.robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()]
             print(dist_from)

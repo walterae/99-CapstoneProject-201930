@@ -36,7 +36,7 @@ def get_my_frame(root, window, mqtt_sender):
     back_button = ttk.Button(frame, text="Backwards")
     delta_label =ttk.Label(frame,text="Delta")
     delta_entry = ttk.Entry(frame, width=8)
-    delta_entry.insert(0,"0.5")
+    delta_entry.insert(0,"1")
     go_until_button = ttk.Button(frame, text ="Go Until")
     x_label = ttk.Label(frame, text ="X")
     x_entry = ttk.Entry(frame, width =8)
@@ -107,6 +107,6 @@ def move_backward(speed_entry_box,distance_entry_box, mqqt_sender):
 
 def go_until_distance(x,delta,speed,mqqt_sender):
     x = int(x.get())
-    delta = float(delta.get())
+    delta = int(delta.get())
     speed = int(speed.get())
     go_to(mqqt_sender,"GOING UNTIL", x, delta, speed)
